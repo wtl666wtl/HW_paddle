@@ -27,7 +27,7 @@ class Net(CNN):
         self.l2norm = nn.LocalResponseNorm(cfg.CIE.FEATURE_CHANNEL * 2, alpha=cfg.CIE.FEATURE_CHANNEL * 2, beta=0.5, k=0)
         self.gnn_layer = cfg.CIE.GNN_LAYER # numbur of GNN layers
         self.gnn_layer_list = nn.LayerList()
-        self.aff_layers_list = nn.LayerList()
+        self.aff_layer_list = nn.LayerList()
         for i in range(self.gnn_layer):
             if i == 0:
                 gnn_layer = Siamese_ChannelIndependentConv(cfg.CIE.FEATURE_CHANNEL * 2, cfg.CIE.GNN_FEAT, 1)
