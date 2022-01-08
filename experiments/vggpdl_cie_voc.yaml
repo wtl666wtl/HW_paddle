@@ -12,26 +12,28 @@ DATALOADER_NUM: 2
 
 RANDOM_SEED: 123
 
-# PRETRAINED_PATH: ThinkMatchPretrained/pretrained_params_vgg16_cie_voc.pt
+# PRETRAINED_PATH: ../pretrained/pretrained_params_vgg16_cie_voc.pt
 
 # available GPU ids
 GPUS:
-  - 2
+  - 0
   #- 1
 
-# Pairwise data configuration
+# Problem configuratio
 PAIR:
   RESCALE:  # rescaled image size
     - 256
     - 256
+# Graph construction settings
   GT_GRAPH_CONSTRUCT: tri
   REF_GRAPH_CONSTRUCT: tri
+
 
 # Training settings
 TRAIN:
   # start, end epochs
   START_EPOCH: 0
-  NUM_EPOCHS: 20
+  NUM_EPOCHS: 30
 
   LOSS_FUNC: hung
 
