@@ -16,7 +16,7 @@ RANDOM_SEED: 123
 
 # available GPU ids
 GPUS:
-  - 0
+  - 2
   #- 1
 
 # Problem configuratio
