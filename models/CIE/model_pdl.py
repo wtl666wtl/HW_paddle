@@ -4,7 +4,7 @@ import math
 
 from src.lap_solvers_pdl.sinkhorn import Sinkhorn
 from src.utils_pdl.feature_align import feature_align
-from gconv_pdl import Siamese_ChannelIndependentConv #, Siamese_GconvEdgeDPP, Siamese_GconvEdgeOri
+from models.CIE.gconv_pdl import Siamese_ChannelIndependentConv #, Siamese_GconvEdgeDPP, Siamese_GconvEdgeOri
 from models.PCA.affinity_layer_pdl import Affinity
 from src.lap_solvers_pdl.hungarian import hungarian
 from models.GMN.displacement_layer_pdl import Displacement
