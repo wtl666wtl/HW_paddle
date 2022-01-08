@@ -40,7 +40,7 @@ class Net(CNN):
                 weight_attr_1 = paddle.ParamAttr(initializer=paddle.nn.initializer.Uniform(-k, k))
                 bias_attr_1 = paddle.ParamAttr(initializer=paddle.nn.initializer.Uniform(-k, k))
                 self.cross_layer = (nn.Linear(cfg.CIE.GNN_FEAT * 2, cfg.CIE.GNN_FEAT, weight_attr=weight_attr_1, bias_attr=bias_attr_1))
-        self.rescale = cfg.PROBLEM.RESCALE
+        self.rescale = cfg.PAIR.RESCALE
 
     def forward(self, src, tgt, P_src, P_tgt, G_src, G_tgt, H_src, H_tgt, ns_src, ns_tgt, K_G, K_H, type='img'):
         if type == 'img' or type == 'image':

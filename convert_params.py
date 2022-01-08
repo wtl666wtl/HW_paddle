@@ -5,8 +5,8 @@ import paddle.fluid as fluid
 from torchvision import models
 from paddle import vision
 
-from models.CIE.model import Net as tchPCA
-from models.CIE.model_pdl import Net as pdlPCA
+from models.CIE.model import Net as tchCIE
+from models.CIE.model_pdl import Net as pdlCIE
 from src.utils.model_sl import load_model
 from src.utils.config import cfg
 
@@ -81,8 +81,8 @@ def cie_convert():
     please move this file to the father dir
     '''
     with fluid.dygraph.guard():
-        model_th = tchPCA()
-        model_pd = pdlPCA()
+        model_th = tchCIE()
+        model_pd = pdlCIE()
         #load_model(model_th, "output/vgg16_pca_voc/params/params_0020.pt")
         load_model(model_th, "../pretrained/pretrained_params_vgg16_cie_voc.pt")
         #load_model(model_th , 'share_param.pt')
