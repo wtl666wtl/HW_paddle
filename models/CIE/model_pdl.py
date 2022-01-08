@@ -26,15 +26,15 @@ class Net(CNN):
         self.displacement_layer = Displacement()
         self.l2norm = nn.LocalResponseNorm(cfg.CIE.FEATURE_CHANNEL * 2, alpha=cfg.CIE.FEATURE_CHANNEL * 2, beta=0.5, k=0)
         self.gnn_layer = cfg.CIE.GNN_LAYER # numbur of GNN layers
-        self.gnn_layers = nn.LayerList()
-        self.aff_layers = nn.LayerList()
+        self.gnn_layer_list = nn.LayerList()
+        self.aff_layers_list = nn.LayerList()
         for i in range(self.gnn_layer):
             if i == 0:
                 gnn_layer = Siamese_ChannelIndependentConv(cfg.CIE.FEATURE_CHANNEL * 2, cfg.CIE.GNN_FEAT, 1)
             else:
                 gnn_layer = Siamese_ChannelIndependentConv(cfg.CIE.GNN_FEAT, cfg.CIE.GNN_FEAT, cfg.CIE.GNN_FEAT)
-            self.gnn_layers.append(gnn_layer)
-            self.aff_layers.append(Affinity(cfg.CIE.GNN_FEAT))
+            self.gnn_layer_list.append(gnn_layer)
+            self.aff_layer_list.append(Affinity(cfg.CIE.GNN_FEAT))
             if i == self.gnn_layer - 2:  # only second last layer will have cross-graph module
                 k = math.sqrt(1.0 / (cfg.CIE.GNN_FEAT * 2))
                 weight_attr_1 = paddle.ParamAttr(initializer=paddle.nn.initializer.Uniform(-k, k))
@@ -89,12 +89,12 @@ class Net(CNN):
         ss = []
 
         for i in range(self.gnn_layer):
-            gnn_layer = self.gnn_layers[i]
+            gnn_layer = self.gnn_layer_list[i]
 
             # during forward process, the network structure will not change
             emb1, emb2, emb_edge1, emb_edge2 = gnn_layer([A_src, emb1, emb_edge1], [A_tgt, emb2, emb_edge2])
 
-            affinity = self.aff_layers[i]
+            affinity = self.aff_layer_list[i]
             s = affinity(emb1, emb2) # xAx^T
 
             s = self.sinkhorn(s, ns_src, ns_tgt)
