@@ -5,8 +5,8 @@ import paddle.fluid as fluid
 from torchvision import models
 from paddle import vision
 
-from models.PCA.model import Net as tchPCA
-from models.PCA.model_pdl import Net as pdlPCA
+from models.CIE.model import Net as tchPCA
+from models.CIE.model_pdl import Net as pdlPCA
 from src.utils.model_sl import load_model
 from src.utils.config import cfg
 
@@ -75,24 +75,23 @@ def vgg_convert():
         print(len(model_pd.state_dict().keys()))
         convert_params(model_th, model_pd, model_path)
 
-def pca_convert():
+def cie_convert():
     '''
-    If u want to convert PCA
+    If u want to convert CIE
     please move this file to the father dir
     '''
     with fluid.dygraph.guard():
         model_th = tchPCA()
         model_pd = pdlPCA()
         #load_model(model_th, "output/vgg16_pca_voc/params/params_0020.pt")
-        load_model(model_th, "pretrained/pretrained_params_vgg16_pca_voc.pt")
+        load_model(model_th, "../pretrained/pretrained_params_vgg16_cie_voc.pt")
         #load_model(model_th , 'share_param.pt')
-        model_path = "./pretrained/new_vgg16_pca_voc"
+        model_path = "../pretrained/new_vgg16_cie_voc"
         print(model_th.state_dict().keys())
         print(len(model_th.state_dict().keys()))
         print(model_pd.state_dict().keys())
         print(len(model_pd.state_dict().keys()))
         convert_params(model_th, model_pd, model_path)
-    
 
 if __name__ == '__main__':
     from src.utils.dup_stdout_manager import DupStdoutFileManager
@@ -100,4 +99,4 @@ if __name__ == '__main__':
     from src.utils.print_easydict import print_easydict
 
     args = parse_args('Deep learning of graph matching training & evaluation code.')
-    pca_convert()
+    cie_convert()
