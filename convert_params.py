@@ -98,5 +98,5 @@ if __name__ == '__main__':
     from src.utils.parse_args import parse_args
     from src.utils.print_easydict import print_easydict
 
-    args = parse_args('Deep learning of graph matching training & evaluation code.')
+    #args = parse_args('Deep learning of graph matching training & evaluation code.')
     cie_convert()
