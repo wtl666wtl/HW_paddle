@@ -16,7 +16,7 @@ def eval_model(model, dataloader, eval_epoch=None, verbose=False):
     print('Start evaluation...')
     since = time.time()
 
-    paddle.set_device('gpu:0')
+    paddle.set_device('gpu:2')
 
     '''
     if eval_epoch is not None:
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     Net = mod.Net
 
     paddle.seed(cfg.RANDOM_SEED)
-    paddle.set_device(device='gpu:0')
+    paddle.set_device(device='gpu:2')
 
     image_dataset = GMDataset(cfg.DATASET_FULL_NAME,
                               sets='test',
