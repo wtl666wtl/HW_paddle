@@ -129,7 +129,7 @@ if __name__ == '__main__':
     #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     model = Net()
-    load_model(model, '../pretrained/new_vgg16_cie_voc.pdparams')
+    load_model(model, '../pretrained/new_vgg16_cie_voc')
     #load_model(model, 'pretrained_vgg16_pca_voc.pdparams')
     #model = model.to(device)
     #model = DataParallel(model, device_ids=cfg.GPUS)
