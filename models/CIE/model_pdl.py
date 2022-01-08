@@ -81,11 +81,11 @@ class Net(CNN):
         emb_edge2 = Q_tgt.unsqueeze(-1)
 
         # adjacency matrices
-        A_src = paddle.bmm(G_src, H_src.transpose(0, 2, 1))
-        A_tgt = paddle.bmm(G_tgt, H_tgt.transpose(0, 2, 1))
+        A_src = paddle.bmm(G_src, H_src.transpose((0, 2, 1)))
+        A_tgt = paddle.bmm(G_tgt, H_tgt.transpose((0, 2, 1)))
 
         # U_src, F_src are features at different scales
-        emb1, emb2 = paddle.concat((U_src, F_src), axis=1).transpose(0, 2, 1), paddle.concat((U_tgt, F_tgt), axis=1).transpose(0, 2, 1)
+        emb1, emb2 = paddle.concat((U_src, F_src), axis=1).transpose((0, 2, 1)), paddle.concat((U_tgt, F_tgt), axis=1).transpose((0, 2, 1))
         ss = []
 
         for i in range(self.gnn_layer):
@@ -103,7 +103,7 @@ class Net(CNN):
             if i == self.gnn_layer - 2:
                 cross_graph = self.cross_layer
                 new_emb1 = cross_graph(paddle.concat((emb1, paddle.bmm(s, emb2)), axis=-1))
-                new_emb2 = cross_graph(paddle.concat((emb2, paddle.bmm(s.transpose(0, 2, 1), emb1)), axis=-1))
+                new_emb2 = cross_graph(paddle.concat((emb2, paddle.bmm(s.transpose((0, 2, 1)), emb1)), axis=-1))
                 emb1 = new_emb1
                 emb2 = new_emb2
 
