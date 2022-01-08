@@ -19,7 +19,7 @@ GPUS:
   - 2
   #- 1
 
-# Problem configuratio
+# Problem configuration
 PAIR:
   RESCALE:  # rescaled image size
     - 256
